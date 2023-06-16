@@ -1,0 +1,290 @@
+//sorting
+public class SortingAlgorithms {
+
+    public static void main(String[] args) {
+        int[] arr = {5, 3, 1, 4, 2, 6};
+
+        // Bubble Sort
+        bubbleSort(arr.clone());
+
+        // Selection Sort
+        selectionSort(arr.clone());
+
+        // Insertion Sort
+        insertionSort(arr.clone());
+
+        // Merge Sort
+        mergeSort(arr.clone());
+
+        // Quick Sort
+        quickSort(arr.clone());
+
+        // Arrays.sort() - Timsort
+        timsort(arr.clone());
+    }
+
+    public static void bubbleSort(int[] arr) {
+        int n = arr.length;
+        for (int i = 0; i < n - 1; i++) {
+            for (int j = 0; j < n - i - 1; j++) {
+                if (arr[j] > arr[j + 1]) {
+                    swap(arr, j, j + 1);
+                }
+            }
+        }
+        System.out.println("Bubble Sort: " + arrayToString(arr));
+    }
+
+    public static void selectionSort(int[] arr) {
+        int n = arr.length;
+        for (int i = 0; i < n - 1; i++) {
+            int minIndex = i;
+            for (int j = i + 1; j < n; j++) {
+                if (arr[j] < arr[minIndex]) {
+                    minIndex = j;
+                }
+            }
+            swap(arr, i, minIndex);
+        }
+        System.out.println("Selection Sort: " + arrayToString(arr));
+    }
+
+    public static void insertionSort(int[] arr) {
+        int n = arr.length;
+        for (int i = 1; i < n; i++) {
+            int key = arr[i];
+            int j = i - 1;
+            while (j >= 0 && arr[j] > key) {
+                arr[j + 1] = arr[j];
+                j--;
+            }
+            arr[j + 1] = key;
+        }
+        System.out.println("Insertion Sort: " + arrayToString(arr));
+    }
+
+    public static void mergeSort(int[] arr) {
+        mergeSortRecursive(arr, 0, arr.length - 1);
+        System.out.println("Merge Sort: " + arrayToString(arr));
+    }
+
+    private static void mergeSortRecursive(int[] arr, int left, int right) {
+        if (left < right) {
+            int mid = (left + right) / 2;
+            mergeSortRecursive(arr, left, mid);
+            mergeSortRecursive(arr, mid + 1, right);
+            merge(arr, left, mid, right);
+        }
+    }
+
+    private static void merge(int[] arr, int left, int mid, int right) {
+        int n1 = mid - left + 1;
+        int n2 = right - mid;
+
+        int[] leftArr = new int[n1];
+        int[] rightArr = new int[n2];
+
+        for (int i = 0; i < n1; ++i) {
+            leftArr[i] = arr[left + i];
+        }
+        for (int j = 0; j < n2; ++j) {
+            rightArr[j] = arr[mid + 1 + j];
+        }
+
+        int i = 0, j = 0;
+        int k = left;
+        while (i < n1 && j < n2) {
+            if (leftArr[i] <= rightArr[j]) {
+                arr[k] = leftArr[i];
+                i++;
+            } else {
+                arr[k] = rightArr[j];
+                j++;
+            }
+            k++;
+        }
+
+        while (i < n1) {
+            arr[k] = leftArr[i];
+            i++;
+            k++;
+        }
+
+        while (j < n2) {
+            arr[k] = rightArr[j];
+            j++;
+            k++;
+        }
+    }
+
+    public static void quickSort(int[] arr) {
+        quickSortRecursive(arr, 0, arr.length - 1);
+        System.out.println("Quick Sort: " + arrayToString(arr));
+    }
+
+    private static void quickSortRecursive(int[] arr, int low, int high) {
+        if (low < high) {
+            int pi = partition(arr, low, high);
+            quickSortRecursive(arr, low, pi - 1);
+            quickSortRecursive(arr, pi + 1, high);
+        }
+    }
+
+//numeric to roman
+import java.util.*;
+class RomanNumberConverter{
+		
+		public static void main(String[] args){
+			Scanner input=new Scanner(System.in);
+			qq s=new qq();
+			
+			System.out.print("Enter integer number:");
+			int x=input.nextInt();
+			
+			s.numeric(x);
+			
+			System.out.print("\nenter data: ");
+			String cc=input.nextLine();
+			
+		}
+		
+}
+
+class qq{
+	
+		void numeric(int x){
+			int y=0,z=0,sum=0;
+			
+			if(1000<=x){
+				y=x/1000;
+				z=x%1000;
+				for(int i=0;y>i;i++){
+					System.out.print("M");
+				}
+				x=z;
+			}
+			
+			if(500<=x){
+				y=x/500;
+				z=x%500;
+				for(int i=0;y>i;i++){
+					System.out.print("D");
+				}
+				x=z;
+			}
+			
+			if(100<=x){
+				y=x/100;
+				z=x%100;
+				for(int i=0;y>i;i++){
+					System.out.print("C");
+				}
+				x=z;
+			}
+			
+			if(50<=x){
+				y=x/50;
+				z=x%50;
+				for(int i=0;y>i;i++){
+					System.out.print("L");
+				}
+				x=z;
+			}
+			
+			if(10<=x){
+				y=x/10;
+				z=x%10;
+				for(int i=0;y>i;i++){
+					System.out.print("X");
+				}
+				x=z;
+			}
+			
+			if(5<=x){
+				y=x/5;
+				z=x%5;
+				for(int i=0;y>i;i++){
+					System.out.print("V");
+				}
+				x=z;
+			}
+			
+			if(999==x){
+				System.out.print("IM");
+			}if(499==x){
+				System.out.print("ID");
+			}if(99==x){
+				System.out.print("IC");
+			}if(49==x){
+				System.out.print("IL");
+			}if(9==x){
+				System.out.print("IX");
+			}if(4==x){
+				System.out.print("IV");
+			}if(3>=x){
+				for(int i=0;i<x;i++){
+					System.out.print("I");
+				}
+			}
+		}
+}
+
+class pp{
+	
+		roman(string cc){
+			char[] arr=cc.toCharArray();
+			
+				for(int i=0;i<arr.length;i++){
+					if(arr[i]=='I'){
+						if(arr[i+1]=='V'){
+							sum+=4;
+							i++;
+						}
+						if(arr[i+1]=='X'){
+							sum+=9;
+							i++;
+						}
+						if(arr[i+1]=='L'){
+							sum+=49;
+							i++;
+						}
+						if(arr[i+1]=='C'){
+							sum+=99;
+							i++;
+						}
+						if(arr[i+1]=='D'){
+							sum+=499;
+							i++;
+						}
+						if(arr[i+1]=='M'){
+							sum+=999;
+							i++;
+						}
+					}
+				
+					else if(arr[i]=='M'){
+						sum+=1000;
+					}
+					else if(arr[i]=='D'){
+						sum+=500;
+					}
+					else if(arr[i]=='C'){
+						sum+=100;
+					}
+					else if(arr[i]=='L'){
+						sum+=50;
+					}
+					else if(arr[i]=='X'){
+						sum+=10;
+					}
+					else if(arr[i]=='V'){
+						sum+=5;
+					}
+					else if(arr[i]=='I'){
+						sum+=1;
+					}
+			}
+		}
+}
+
+//
