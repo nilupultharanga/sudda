@@ -1,0 +1,209 @@
+//target number in arry two number
+import java.util.*;
+
+public class TwoSum {
+
+    public static void main(String[] args) {
+
+        // Get the original array from the user
+        System.out.print("Original array: ");
+        Scanner scanner = new Scanner(System.in);
+        String[] arrStr = scanner.nextLine().split(" ");
+        int[] arr = new int[arrStr.length];
+        for (int i = 0; i < arr.length; i++) {
+            arr[i] = Integer.parseInt(arrStr[i]);
+        }
+
+        // Get the target value from the user
+        System.out.print("Target value: ");
+        int target = scanner.nextInt();
+
+        // Find the indices of the two numbers whose sum is equal to the target value
+        int[] indices = findIndices(arr, target);
+
+        // Print the indices
+        System.out.println("Indices of the two numbers whose sum is equal to target value: " + target + "\n " + indices);
+    }
+
+    private static int[] findIndices(int[] arr, int target) {
+
+        // Create a hash map to store the elements of the array and their indices
+        HashMap<Integer, Integer> map = new HashMap<>();
+
+        // Iterate over the array
+        for (int i = 0; i < arr.length; i++) {
+
+            // Add the element and its index to the hash map
+            map.put(arr[i], i);
+        }
+
+        // Iterate over the array again
+        for (int i = 0; i < arr.length; i++) {
+
+            // Subtract the current element from the target value
+            int diff = target - arr[i];
+
+            // Check if the difference is present in the hash map
+            if (map.containsKey(diff)) {
+
+                // Return the indices of the two numbers
+                return new int[]{i, map.get(diff)};
+            }
+        }
+
+        // Return null if the two numbers are not found
+        return null;
+    }
+}
+
+
+//book publication
+class Publication {
+  String title;
+  double price;
+
+  public Publication(String title, double price) {
+    this.title = title;
+    this.price = price;
+  }
+
+  public String getData() {
+    return "Title: " + title + ", Price: " + price;
+  }
+
+  public void print() {
+    System.out.println(getData());
+  }
+}
+
+interface Book {
+  int accessionNumber();
+}
+
+interface Magazine {
+  int volumeNumber();
+}
+
+class Journal extends Publication implements Book, Magazine {
+  int accessionNumber;
+  int volumeNumber;
+
+  public Journal(String title, double price, int accessionNumber, int volumeNumber) {
+    super(title, price);
+    this.accessionNumber = accessionNumber;
+    this.volumeNumber = volumeNumber;
+  }
+
+  public int accessionNumber() {
+    return accessionNumber;
+  }
+
+  public int volumeNumber() {
+    return volumeNumber;
+  }
+
+  @Override
+  public void print() {
+    super.print();
+    System.out.println("Accession Number: " + accessionNumber);
+    System.out.println("Volume Number: " + volumeNumber);
+  }
+}
+
+public class main{
+	public static void main(String []args){
+		Journal journal1 = new Journal("The Journal of Modern Physics", 29.76, 12345, 67890);
+		System.out.println(journal1.getData());
+		journal1.print(); 
+
+		Journal journal2 = new Journal("The Journal of Computer Science", 19, 98765, 43210);
+		System.out.println(journal2.getData()); 
+		journal2.print(); 
+	}
+}
+
+//get shape and provide area and circumference
+import java.util.*;
+
+abstract class shape{
+	public void toString(){
+		System.out.println("Type of Figure");
+		String type=fig.nextLine();
+	}
+	
+	public abstaract void getArea();
+	public abstaract void getCircumference();
+	public abstaract void getSurface();
+	public abstaract void getVolume();
+	
+	
+}
+class TwoDimensional extends shape{
+	
+	public void getArea(){
+		int Area,Base,Height,Width,pi,Radius;
+		if(type=="Triangle"){
+			Area = 1/2 * Base * Height;	
+		}else if(type=="Rectangle"){
+			Area = Height * Width;	
+		}else if(type=="Circle"){
+			Area = pi * Radius * Radius;
+		}
+	}
+	
+	
+	public void getCircumference(){
+		int Circumference,Side1,Side2,Side3,Height,Width,pi,Radius;
+		if(type=="Triangle"){
+			Circumference = Side1 + Side2 + Side3;
+		}else if(type=="Rectangle"){
+			Circumference = 2* (Height + Width);	
+		}else if(type=="Circle"){
+			Circumference = 2* Pi * Radius;
+		}
+	}
+	
+}
+class ThreeDimensional extends shape{
+	
+	public void getSurface(){
+		int Surface,Height,Width,Length,pi,Radius;
+		if(type=="Box"){
+			Surface= 2*(Height * Width + Width * Length + Length * Height);
+
+		}else if(type=="Cone"){
+			Surface= 2 * pi * Radius (Radius + Height);	
+		}else if(type=="Cylinder"){
+			Surface= 2 * pi * Radius (Radius + Height);
+		}else if(type=="Sphere"){
+			Surface= 4 * pi * Radius * Radius;
+		}
+	}
+	
+	public void getVolume(){
+		int Volume,Height,Width,Length,Radius,pi
+		if(type=="Box"){
+			Volume= Height * Width * Length;
+		}else if(type=="Cone"){
+			Volume= 1/3 * pi * Radius * Radius * Height;	
+		}else if(type=="Cylinder"){
+			Volume= pi * Radius * Radius * Height;
+		}else if(type=="Sphere"){
+			Volume= 4/3 * pi * Radius * Radius * Radius;
+		}
+	}
+}
+class Main{
+	public static void main(String[] args){
+		Scanner fig=new Scanner(System.in);
+		
+		TwoDimensional area1=new TwoDimensional();
+		area1.toString();
+		area1.getArea();
+		area1.getCircumference();
+		
+		ThreeDimensional tree=new ThreeDimensional();
+		tree.getSurface();
+		tree.getVolume();
+	}
+}
